@@ -3,12 +3,6 @@ How to untar and read DWD regnie data
 Maximilian Nölscher
 16 April 2020
 
-<!--html_preserve-->
-<script>
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
-<!--/html_preserve-->
 For the following code chunks we need to load all required libraries
 
 ``` r
@@ -67,14 +61,11 @@ Now we untar all files. This might take a while. For 5 `.tar` files it took appr
 ``` r
 directory_tar_files %>% 
   paste0(tar_files_list) %>% 
-  map(
-    ~untar(.,
-           exdir = "../../processed_data/dwd_regnie_data/")
-    )
+  map(untar, exdir = "../../processed_data/dwd_regnie_data/")
 ```
 
-Read in/ Import
-===============
+Read / Import
+=============
 
 Now we can start to read in the `.gz` files
 

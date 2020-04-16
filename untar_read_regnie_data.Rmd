@@ -3,7 +3,6 @@ title: "How to untar and read DWD regnie data"
 author: "Maximilian Nölscher"
 date: "16 April 2020"
 output: github_document
-always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -12,9 +11,6 @@ knitr::opts_chunk$set(messages = FALSE)
 knitr::opts_chunk$set(warnings = FALSE)
 ```
 
-```{r klippy, echo=FALSE, include=TRUE}
-klippy::klippy()
-```
 
 For the following code chunks we need to load all required libraries
 ```{r}
@@ -57,13 +53,10 @@ Now we untar all files. This might take a while. For 5 `.tar` files it took appr
 ```{r, eval=FALSE}
 directory_tar_files %>% 
   paste0(tar_files_list) %>% 
-  map(
-    ~untar(.,
-           exdir = "../../processed_data/dwd_regnie_data/")
-    )
+  map(untar, exdir = "../../processed_data/dwd_regnie_data/")
 ```
 
-# Read in/ Import
+# Read / Import
 
 Now we can start to read in the `.gz` files
 
@@ -89,7 +82,7 @@ raster_files <- directory_gz_files %>%
 ```
 
 Plot the rasters
-```{r}
+```{r, fig.width=50}
 raster_files %>% 
   map(plot)
 ```
@@ -111,7 +104,7 @@ raster_stack %>%
 ```
 
 ## Reproject the CRS
-```{r}
+```{r, }
 raster_files %>% 
   map(projectRaster, crs = "+init=epsg:32632")
 ```
