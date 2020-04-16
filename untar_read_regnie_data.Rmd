@@ -96,7 +96,7 @@ raster_stack %>%
   calc(sum)
 ```
 
-... or plot the raster (as stack)
+## ... or plot the raster (as stack)
 ```{r}
 raster_stack %>% 
   plot

@@ -114,6 +114,7 @@ raster_stack %>%
     ## values      : 0, 136.2  (min, max)
 
 ... or plot the raster (as stack)
+---------------------------------
 
 ``` r
 raster_stack %>% 
