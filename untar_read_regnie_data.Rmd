@@ -97,7 +97,7 @@ raster_stack %>%
 ```
 
 ## ... or plot the raster (as stack)
-```{r, fig.height=3}
+```{r}
 raster_stack %>% 
   plot
 ```

@@ -121,7 +121,7 @@ raster_stack %>%
   plot
 ```
 
-![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
 Reproject the CRS
 -----------------
