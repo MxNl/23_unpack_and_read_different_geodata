@@ -1,6 +1,6 @@
 How to untar and read DWD regnie data
 ================
-Maximilian Nölscher
+Maximilian Nölscher,
 16 April 2020
 
 For the following code chunks we need to load all required libraries
@@ -44,17 +44,8 @@ We create a new folder to put in the untared files
 
 ``` r
 dir.create("../../processed_data/")
-```
-
-    ## Warning in dir.create("../../processed_data/"): '..\..\processed_data' already
-    ## exists
-
-``` r
 dir.create("../../processed_data/dwd_regnie_data/")
 ```
-
-    ## Warning in dir.create("../../processed_data/dwd_regnie_data/"): '..\..
-    ## \processed_data\dwd_regnie_data' already exists
 
 Now we untar all files. This might take a while. For 5 `.tar` files it took approx. 30 seconds.
 
@@ -99,11 +90,11 @@ raster_files <- directory_gz_files %>%
 Plot the rasters
 
 ``` r
+par(mfrow=c(2,3))
+
 raster_files %>% 
   map(plot)
 ```
-
-![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-11-1.png)![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-11-2.png)![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-11-3.png)![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-11-4.png)![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-11-5.png)
 
     ## [[1]]
     ## NULL
@@ -119,6 +110,8 @@ raster_files %>%
     ## 
     ## [[5]]
     ## NULL
+
+![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 Now you have different options \#\# Create Raster Stack
 
@@ -216,9 +209,6 @@ We create a new folder to put in the `.tif` files
 ``` r
 dir.create("../../processed_data/geotiffs/")
 ```
-
-    ## Warning in dir.create("../../processed_data/geotiffs/"): '..\..
-    ## \processed_data\geotiffs' already exists
 
 We create a vector containing the file names
 
