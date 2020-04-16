@@ -87,32 +87,6 @@ raster_files <- directory_gz_files %>%
   map(esmisc::read_regnie)
 ```
 
-Plot the rasters
-
-``` r
-par(mfrow=c(2,3))
-
-raster_files %>% 
-  map(plot)
-```
-
-    ## [[1]]
-    ## NULL
-    ## 
-    ## [[2]]
-    ## NULL
-    ## 
-    ## [[3]]
-    ## NULL
-    ## 
-    ## [[4]]
-    ## NULL
-    ## 
-    ## [[5]]
-    ## NULL
-
-![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-11-1.png)
-
 Now you have different options \#\# Create Raster Stack
 
 ``` r
@@ -138,6 +112,15 @@ raster_stack %>%
     ## data source : in memory
     ## names       : layer 
     ## values      : 0, 136.2  (min, max)
+
+... or plot the raster (as stack)
+
+``` r
+raster_stack %>% 
+  plot
+```
+
+![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 Reproject the CRS
 -----------------

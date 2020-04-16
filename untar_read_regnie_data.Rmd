@@ -81,15 +81,6 @@ raster_files <- directory_gz_files %>%
   map(esmisc::read_regnie)
 ```
 
-Plot the rasters
-```{r, fig.width=100}
-par(mfrow=c(2,3))
-
-raster_files %>% 
-  map(plot)
-```
-
-
 Now you have different options
 ## Create Raster Stack
 ```{r}
@@ -103,6 +94,12 @@ e.g. create the sum
 ```{r}
 raster_stack %>% 
   calc(sum)
+```
+
+... or plot the raster (as stack)
+```{r, fig.width=100}
+raster_stack %>% 
+  plot
 ```
 
 ## Reproject the CRS
