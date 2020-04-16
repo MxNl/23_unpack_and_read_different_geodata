@@ -1,0 +1,143 @@
+---
+title: "How to untar and read DWD regnie data"
+author: "Maximilian Nölscher"
+date: "16 April 2020"
+output: github_document
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(messages = FALSE)
+knitr::opts_chunk$set(warnings = FALSE)
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy()
+```
+
+For the following code chunks we need to load all required libraries
+```{r}
+library(esmisc)
+library(raster)
+library(tidyverse)
+```
+
+
+# Untar
+
+- The DWD regnie data can be found on the [DWD ftp Server of Climate Data Center](https://opendata.dwd.de/climate_environment/CDC/grids_germany/daily/regnie/)
+- Each file is named as `daily_regnie_ra<Y>m.tar`
+- Each file itself contains 365 `ra<ymd>.gz` file, one per day.
+
+For this example I just put 5 `.tar` files into the directory `../../raw_data/dwd_regnie_data/`
+```{r}
+directory_tar_files <- "../../raw_data/dwd_regnie_data/"
+```
+
+First we need to untar the files.
+We first create a list of all files
+```{r}
+tar_files_list <- directory_tar_files %>% list.files()
+```
+
+Show files
+```{r}
+tar_files_list
+```
+
+We create a new folder to put in the untared files
+```{r}
+dir.create("../../processed_data/")
+dir.create("../../processed_data/dwd_regnie_data/")
+```
+
+
+Now we untar all files. This might take a while. For 5 `.tar` files it took approx. 30 seconds.
+```{r, eval=FALSE}
+directory_tar_files %>% 
+  paste0(tar_files_list) %>% 
+  map(
+    ~untar(.,
+           exdir = "../../processed_data/dwd_regnie_data/")
+    )
+```
+
+# Read in/ Import
+
+Now we can start to read in the `.gz` files
+
+First, we list all files again.
+```{r}
+directory_gz_files <- "../../processed_data/dwd_regnie_data/"
+```
+
+```{r}
+gz_files_list <- directory_gz_files %>% list.files()
+```
+
+Show files
+```{r}
+gz_files_list %>% head()
+```
+
+Now comes the core chunk to read in the files. I just read in the first 5 files for demonstration
+```{r}
+raster_files <- directory_gz_files %>% 
+  paste0(gz_files_list[1:5]) %>% 
+  map(esmisc::read_regnie)
+```
+
+Plot the rasters
+```{r}
+raster_files %>% 
+  map(plot)
+```
+
+
+Now you have different options
+## Create Raster Stack
+```{r}
+raster_stack <- raster_files %>% 
+  stack()
+```
+
+## ... and do calculations
+
+e.g. create the sum
+```{r}
+raster_stack %>% 
+  calc(sum)
+```
+
+## Reproject the CRS
+```{r}
+raster_files %>% 
+  map(projectRaster, crs = "+init=epsg:32632")
+```
+
+
+## Save as GTiff
+
+We create a new folder to put in the `.tif` files
+```{r}
+dir.create("../../processed_data/geotiffs/")
+```
+
+We create a vector containing the file names
+```{r}
+tif_file_names <- gz_files_list[1:5] %>% 
+  str_remove(".gz") %>% 
+  str_c("../../processed_data/geotiffs/",
+        .,
+        ".tif")
+```
+
+We save the rasters as `.tif` files
+```{r}
+raster_files %>% 
+  map2(.x = .,
+       .y = tif_file_names, 
+       writeRaster, format="GTiff", overwrite=TRUE)
+```
+
