@@ -2,8 +2,8 @@
 title: "How to untar and read DWD regnie data"
 author: "Maximilian Nölscher, "
 date: "16 April 2020"
-output: github_document
-  # number_sections: TRUE
+output: 
+  github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -108,8 +108,10 @@ raster_stack %>%
 
 ## Reproject the CRS
 ```{r}
+new_crs <- "+init=epsg:32632"
+
 raster_files %>% 
-  map(projectRaster, crs = "+init=epsg:32632")
+  map(projectRaster, crs = new_crs)
 ```
 
 

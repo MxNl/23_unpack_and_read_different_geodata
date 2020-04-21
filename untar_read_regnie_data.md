@@ -129,8 +129,10 @@ Reproject the CRS
 -----------------
 
 ``` r
+new_crs <- "+init=epsg:32632"
+
 raster_files %>% 
-  map(projectRaster, crs = "+init=epsg:32632")
+  map(projectRaster, crs = new_crs)
 ```
 
     ## [[1]]
