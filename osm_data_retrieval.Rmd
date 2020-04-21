@@ -154,6 +154,14 @@ n_discrete_colours <- hues::iwanthue(number_of_colours)
 
 # Results
 
+## Dataframe
+
+Show the downloaded features as dataframe
+```{r}
+result_sf
+```
+
+
 ## Plot
 
 We can now plot an interactive map, showing our download results

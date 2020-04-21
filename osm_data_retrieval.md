@@ -150,6 +150,34 @@ n_discrete_colours <- hues::iwanthue(number_of_colours)
 Results
 =======
 
+Dataframe
+---------
+
+Show the downloaded features as dataframe
+
+``` r
+result_sf
+```
+
+    ## Simple feature collection with 31 features and 4 fields
+    ## geometry type:  POLYGON
+    ## dimension:      XY
+    ## bbox:           xmin: 2.073305 ymin: 13.43088 xmax: 2.213021 ymax: 13.56623
+    ## epsg (SRID):    4326
+    ## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+    ## First 10 features:
+    ##       osm_id      key       value      master                       geometry
+    ## 1  189323106 man_made water_tower water tower POLYGON ((2.11754 13.51414,...
+    ## 2  238297374 man_made water_tower water tower POLYGON ((2.098539 13.49173...
+    ## 3  238297375 man_made water_tower water tower POLYGON ((2.098564 13.49141...
+    ## 4  313557710 man_made water_tower water tower POLYGON ((2.095648 13.52189...
+    ## 5  442171446 man_made water_tower water tower POLYGON ((2.140575 13.49464...
+    ## 6  500091189 man_made water_tower water tower POLYGON ((2.129039 13.50664...
+    ## 7  526926651 man_made water_tower water tower POLYGON ((2.212924 13.44856...
+    ## 8  659675721 man_made water_tower water tower POLYGON ((2.094159 13.56541...
+    ## 9  659701317 man_made water_tower water tower POLYGON ((2.115406 13.5658,...
+    ## 10 659701318 man_made water_tower water tower POLYGON ((2.115374 13.56609...
+
 Plot
 ----
 
@@ -193,4 +221,4 @@ result_sf %>%
   tmap::tm_basemap(leaflet::providers$Esri.WorldImagery)
 ```
 
-![](osm_data_retrieval_files/figure-markdown_github/unnamed-chunk-16-1.png)
+![](osm_data_retrieval_files/figure-markdown_github/unnamed-chunk-17-1.png)
