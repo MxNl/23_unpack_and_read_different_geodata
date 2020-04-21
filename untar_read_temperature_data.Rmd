@@ -1,0 +1,21 @@
+---
+title: "How to untar and read DWD temperature data"
+author: "Maximilian Nölscher, "
+date: "16 April 2020"
+output: 
+  github_document
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+
+For the following code chunks we need to load all required libraries
+```{r}
+library(esmisc)
+library(raster)
+library(tidyverse)
+```
