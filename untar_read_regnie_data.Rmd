@@ -3,6 +3,7 @@ title: "How to untar and read DWD regnie data"
 author: "Maximilian Nölscher, "
 date: "16 April 2020"
 output: github_document
+  # number_sections: TRUE
 ---
 
 ```{r setup, include=FALSE}
@@ -76,12 +77,15 @@ gz_files_list %>% head()
 
 Now comes the core chunk to read in the files. I just read in the first 5 files for demonstration
 ```{r}
+first_n_files_to_read <- 1:5
+
 raster_files <- directory_gz_files %>% 
-  paste0(gz_files_list[1:5]) %>% 
+  paste0(gz_files_list[first_n_files_to_read]) %>% 
   map(esmisc::read_regnie)
 ```
 
 Now you have different options
+
 ## Create Raster Stack
 ```{r}
 raster_stack <- raster_files %>% 

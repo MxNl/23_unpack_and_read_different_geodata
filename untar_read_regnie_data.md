@@ -36,9 +36,7 @@ Show files
 tar_files_list
 ```
 
-    ## [1] "daily_regnie_ra1931m.tar" "daily_regnie_ra1932m.tar"
-    ## [3] "daily_regnie_ra1933m.tar" "daily_regnie_ra1934m.tar"
-    ## [5] "daily_regnie_ra1935m.tar"
+    ## [1] "daily_regnie_ra1931m.tar" "daily_regnie_ra1932m.tar" "daily_regnie_ra1933m.tar" "daily_regnie_ra1934m.tar" "daily_regnie_ra1935m.tar"
 
 We create a new folder to put in the untared files
 
@@ -76,18 +74,22 @@ Show files
 gz_files_list %>% head()
 ```
 
-    ## [1] "ra310101.gz" "ra310102.gz" "ra310103.gz" "ra310104.gz" "ra310105.gz"
-    ## [6] "ra310106.gz"
+    ## [1] "ra310101.gz" "ra310102.gz" "ra310103.gz" "ra310104.gz" "ra310105.gz" "ra310106.gz"
 
 Now comes the core chunk to read in the files. I just read in the first 5 files for demonstration
 
 ``` r
+first_n_files_to_read <- 1:5
+
 raster_files <- directory_gz_files %>% 
-  paste0(gz_files_list[1:5]) %>% 
+  paste0(gz_files_list[first_n_files_to_read]) %>% 
   map(esmisc::read_regnie)
 ```
 
-Now you have different options \#\# Create Raster Stack
+Now you have different options
+
+Create Raster Stack
+-------------------
 
 ``` r
 raster_stack <- raster_files %>% 
@@ -121,7 +123,7 @@ raster_stack %>%
   plot
 ```
 
-![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-14-1.png)
+![](untar_read_regnie_data_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 Reproject the CRS
 -----------------

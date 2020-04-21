@@ -44,9 +44,7 @@ body {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tar_files_list &lt;-<span class="st"> </span>directory_tar_files <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">list.files</span>()</code></pre></div>
 <p>Show files</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tar_files_list</code></pre></div>
-<pre><code>## [1] &quot;daily_regnie_ra1931m.tar&quot; &quot;daily_regnie_ra1932m.tar&quot;
-## [3] &quot;daily_regnie_ra1933m.tar&quot; &quot;daily_regnie_ra1934m.tar&quot;
-## [5] &quot;daily_regnie_ra1935m.tar&quot;</code></pre>
+<pre><code>## [1] &quot;daily_regnie_ra1931m.tar&quot; &quot;daily_regnie_ra1932m.tar&quot; &quot;daily_regnie_ra1933m.tar&quot; &quot;daily_regnie_ra1934m.tar&quot; &quot;daily_regnie_ra1935m.tar&quot;</code></pre>
 <p>We create a new folder to put in the untared files</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir.create</span>(<span class="st">&quot;../../processed_data/&quot;</span>)
 <span class="kw">dir.create</span>(<span class="st">&quot;../../processed_data/dwd_regnie_data/&quot;</span>)</code></pre></div>
@@ -61,13 +59,15 @@ body {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gz_files_list &lt;-<span class="st"> </span>directory_gz_files <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">list.files</span>()</code></pre></div>
 <p>Show files</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gz_files_list <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
-<pre><code>## [1] &quot;ra310101.gz&quot; &quot;ra310102.gz&quot; &quot;ra310103.gz&quot; &quot;ra310104.gz&quot; &quot;ra310105.gz&quot;
-## [6] &quot;ra310106.gz&quot;</code></pre>
+<pre><code>## [1] &quot;ra310101.gz&quot; &quot;ra310102.gz&quot; &quot;ra310103.gz&quot; &quot;ra310104.gz&quot; &quot;ra310105.gz&quot; &quot;ra310106.gz&quot;</code></pre>
 <p>Now comes the core chunk to read in the files. I just read in the first 5 files for demonstration</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raster_files &lt;-<span class="st"> </span>directory_gz_files <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">paste0</span>(gz_files_list[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">first_n_files_to_read &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
+
+raster_files &lt;-<span class="st"> </span>directory_gz_files <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">paste0</span>(gz_files_list[first_n_files_to_read]) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">map</span>(esmisc<span class="op">::</span>read_regnie)</code></pre></div>
-<p>Now you have different options ## Create Raster Stack</p>
+<p>Now you have different options</p>
+<h2 id="create-raster-stack">Create Raster Stack</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raster_stack &lt;-<span class="st"> </span>raster_files <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stack</span>()</code></pre></div>
 <h2 id="and-do-calculations">... and do calculations</h2>
