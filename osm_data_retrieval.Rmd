@@ -59,7 +59,7 @@ tag_values <- key_value_pairs %>%
 
 We define a bounding box or an area to search in
 ```{r}
-bounding_box <- getbb('niamey, niger', format_out = 'polygon')
+bounding_box <- getbb('ndjamena, chad', format_out = 'polygon')
 ```
 
 Pass this to the overpass API (no need to understand this in detail)
@@ -205,6 +205,16 @@ result_sf %>%
 
 
 
+
+
+```{r}
+square_polygons_for_cropping_raster <- result_sf %>% 
+  st_transform(crs = 25832) %>% 
+  st_centroid() %>% 
+  st_buffer(dist = 100,
+            nQuadSegs = 1,
+            endCapStyle = "SQUARE")
+```
 
 
 
